@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
+    //Authorization details in startup.cs
+    [Authorize] //If we add this annotation then all requests in this controllers can be made only by authorized sources. 
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -31,7 +34,9 @@ namespace DatingApp.API.Controllers
 
         }
 
+
         // GET api/values/5
+        [AllowAnonymous] //This will let a record with particular Id be fetched by bypassing the authorization rule (anyone can access)
         [HttpGet("{id}")]
         public async Task<ActionResult<string>> Get(int id)
         {
