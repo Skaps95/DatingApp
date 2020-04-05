@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,10 @@ login(model: any) {
       localStorage.setItem('token', user.token);
     }
   }));
+}
+
+register(model: any) {
+  return this.http.post(this.baseurl + 'register', model);
 }
 
 
